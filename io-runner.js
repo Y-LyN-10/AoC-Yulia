@@ -7,7 +7,7 @@ const solutionDir = process.argv[2];
 const solve = require(path.resolve(solutionDir));
 
 // Usage from the root dir: node io-runner.js {directory-name}
-// Example: node io-runner.js 01-1_calories
+// Example: node io-runner.js 01-calories
 
 async function processLineByLine() {
   const fileStream = fs.createReadStream(path.resolve(solutionDir,'input.txt'));

@@ -7,9 +7,9 @@ const solutionDir = process.argv[2];
 const solve = require(path.resolve(solutionDir));
 
 // Usage from the root dir: node io-runner.js {directory-name}
-// Example: node io-runner.js 01-calories
+// Example: node io-runner.js 01-count-calories
 
-async function processLineByLine() {
+async function processLineByLine(run) {
   const fileStream = fs.createReadStream(path.resolve(solutionDir,'input.txt'));
 
   const rl = readline.createInterface({
@@ -19,7 +19,8 @@ async function processLineByLine() {
   // Note: we use the crlfDelay option to recognize all instances of CR LF
   // ('\r\n') in input.txt as a single line break.
 
-  solve(rl);
+  run(rl);
 }
 
-processLineByLine();
+processLineByLine(solve.partOne);
+processLineByLine(solve.partTwo);

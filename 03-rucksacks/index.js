@@ -21,9 +21,28 @@ async function partOne(rl) {
 }
 
 async function partTwo(rl) {
-  for await (const line of rl) {
+  let result = 0;
+  let groupCount = 0;
+  let gr = []; // group rucksacks
 
+  for await (const line of rl) {
+    groupCount += 1;
+
+    if (groupCount <= 3) {
+      gr.push(line);
+    }
+
+    if (groupCount === 3) {
+      let commonItem = gr[0].split('').filter(item => ((gr[1].indexOf(item) > -1) && (gr[2].indexOf(item) > -1)))[0];
+      result += alphabet.indexOf(commonItem);
+
+      // reset counters
+      groupCount = 0;
+      gr = [];
+    }
   }
+
+  console.log(result);
 }
 
 module.exports = { partOne, partTwo };

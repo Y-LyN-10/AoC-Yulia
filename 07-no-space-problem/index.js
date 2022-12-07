@@ -49,23 +49,20 @@ async function partOne(rl) {
 
 async function partTwo(rl) {
   const totalSpace = 70000000;
-  const needSpace = 30000000;
+  const needSpace  = 30000000;
 
-  const dirs = await dirtyParseAndBuild(rl);
+  const dirs = dirtySums(await dirtyParseAndBuild(rl));
   const allocatedSpace = dirs['/'].reduce((partialSum, a) => partialSum + a, 0);
+  let needMoreSpace = needSpace - (totalSpace - allocatedSpace);
 
-  // FIXME: something messed up here
-  let availSpace = totalSpace - allocatedSpace;
-  let removeSpace = needSpace - availSpace;
-
-  const dirSums = Object.keys(dirs).map(dir => {
+  const dirSizeSums = Object.keys(dirs).map(dir => {
     return dirs[dir].reduce((partialSum, a) => partialSum + a, 0);
   });
 
-  dirSums.sort((a, b) => a - b);
-  for(let i = 0; i <= dirSums.length; i+=1){
-    if (dirSums[i] >= removeSpace){
-      console.log(dirSums[i]);
+  dirSizeSums.sort((a, b) => a - b);
+  for(let i = 0; i <= dirSizeSums.length; i+=1){
+    if (dirSizeSums[i] >= needMoreSpace){
+      console.log(dirSizeSums[i]);
       return;
     }
   }

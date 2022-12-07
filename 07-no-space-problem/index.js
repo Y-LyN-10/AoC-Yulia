@@ -38,11 +38,11 @@ async function partOne(rl) {
   const dirs = dirtySums(await dirtyParseAndBuild(rl));
 
   // We don't care for dir names and paths anymore
-  const dirSums = Object.keys(dirs).map(dir => {
+  const dirSizeSums = Object.keys(dirs).map(dir => {
     return dirs[dir].reduce((partialSum, a) => partialSum + a, 0);
   });
 
-  let result = dirSums.filter((s) => s < 100000).reduce((partialSum, a) => partialSum + a, 0);
+  let result = dirSizeSums.filter((s) => s < 100000).reduce((partialSum, a) => partialSum + a, 0);
 
   console.log(result);
 }

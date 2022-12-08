@@ -1,8 +1,6 @@
 function getViewDistance(segment, h) {
   for(let i=0; i < segment.length; i+=1){
-    if(segment[i] >= h) {
-      return i+1;
-    }
+    if(segment[i] >= h) return i+1;
   }
 
   return segment.length;
@@ -57,7 +55,6 @@ async function partTwo(rl) {
   for(let i = 1; i < w-1; i += 1) {
     for(let j = 1; j < forest.length -1; j += 1) {
       let tree = forest[i][j];
-      let scenicScore = 1;
 
       let column = [forest.map(row => row[j])][0];
 
@@ -66,7 +63,7 @@ async function partTwo(rl) {
       let topSegment = column.slice(0, i).reverse();
       let bottomSegment = column.slice(i+1);
 
-      scenicScore = getViewDistance(leftSegment, tree)
+      let scenicScore = getViewDistance(leftSegment, tree)
         * getViewDistance(rightSegment, tree)
         * getViewDistance(topSegment, tree)
         * getViewDistance(bottomSegment, tree);
